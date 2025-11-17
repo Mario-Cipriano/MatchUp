@@ -1,9 +1,10 @@
 /* style.css */
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(120deg, #1f1c2c, #928dab);
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #fff;
+  overflow-x: hidden;
 }
 
 header {
@@ -11,18 +12,21 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(15px);
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  padding: 15px 40px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
 }
 header h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
   margin: 0;
+  color: #ff4081;
 }
 nav ul {
   display: flex;
@@ -32,62 +36,65 @@ nav ul {
 }
 nav ul li {
   margin-left: 20px;
-  padding: 8px 15px;
-  border-radius: 8px;
+  padding: 10px 20px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s;
-  background: rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background: rgba(255,255,255,0.05);
 }
 nav ul li:hover, nav ul li.active {
   background: #ff4081;
   color: #fff;
   transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(255,64,129,0.4);
 }
 main {
-  padding: 100px 20px 20px 20px;
-  max-width: 600px;
+  padding: 120px 20px 40px 20px;
+  max-width: 700px;
   margin: 0 auto;
 }
 section {
   display: none;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.6s ease-in-out;
 }
 section.active {
   display: block;
 }
 .match {
-  background: rgba(255,255,255,0.15);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
   padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 15px;
+  margin-bottom: 20px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 .match:hover {
-  transform: translateY(-5px) scale(1.03);
-  background: rgba(255,255,255,0.25);
+  transform: translateY(-8px) scale(1.05);
+  background: linear-gradient(135deg, rgba(255,64,129,0.2), rgba(255,64,129,0.1));
+  box-shadow: 0 12px 30px rgba(255,64,129,0.4);
 }
 button {
   width: 100%;
-  padding: 15px;
+  padding: 18px;
   border: none;
-  border-radius: 12px;
+  border-radius: 30px;
   background: #ff4081;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s;
-  margin-top: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 6px 20px rgba(255,64,129,0.4);
 }
 button:hover {
   background: #ff79b0;
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(255,121,176,0.5);
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
-}
-button:hover {
-  background: #00e676;
 }
