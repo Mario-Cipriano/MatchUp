@@ -25,7 +25,6 @@ function createMatch() {
     container.appendChild(div);
     alert(`Partita ${name} creata con successo! 🎉`);
 
-    // Pulisci i campi
     document.getElementById('newMatchName').value = '';
     document.getElementById('newMatchTime').value = '';
     document.getElementById('newMatchField').value = '';
@@ -36,14 +35,21 @@ function createMatch() {
 
 function changeTheme(theme) {
   switch(theme) {
-    case 'blue':
-      document.body.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
+    case 'white':
+      document.body.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0)';
+      document.body.style.color = '#121212';
+      break;
+    case 'gray':
+      document.body.style.background = 'linear-gradient(135deg, #7f8c8d, #95a5a6)';
+      document.body.style.color = '#fff';
+      break;
+    case 'black':
+      document.body.style.background = 'linear-gradient(135deg, #121212, #1c1c1c)';
+      document.body.style.color = '#fff';
       break;
     case 'purple':
       document.body.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
-      break;
-    case 'green':
-      document.body.style.background = 'linear-gradient(135deg, #1abc9c, #16a085)';
+      document.body.style.color = '#fff';
       break;
   }
 }
@@ -56,5 +62,3 @@ function saveSettings() {
 
 // Sezione predefinita
 showSection('matches');
-;
-
