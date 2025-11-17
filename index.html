@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayFair</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,9 +13,10 @@
     <h1>⚽ PlayFair</h1>
     <nav>
       <ul id="menu">
-        <li onclick="showSection('matches')">Partite</li>
+        <li onclick="showSection('matches')" class="active">Partite</li>
         <li onclick="showSection('create')">Crea partita</li>
         <li onclick="showSection('settings')">Impostazioni</li>
+        <li onclick="showSection('stats')">Statistiche</li>
       </ul>
     </nav>
   </header>
@@ -23,25 +25,44 @@
     <section id="matches" class="active">
       <h2>Partite disponibili</h2>
       <div id="matchesContainer">
-        <div class="match" onclick="joinMatch('Partita 1')">Partita 1 - Ore 20:00</div>
-        <div class="match" onclick="joinMatch('Partita 2')">Partita 2 - Ore 21:30</div>
-        <div class="match" onclick="joinMatch('Partita 3')">Partita 3 - Ore 22:00</div>
+        <div class="match" onclick="joinMatch('Partita 1')">⚽ Partita 1 - Ore 20:00 - Campo A</div>
+        <div class="match" onclick="joinMatch('Partita 2')">⚽ Partita 2 - Ore 21:30 - Campo B</div>
+        <div class="match" onclick="joinMatch('Partita 3')">⚽ Partita 3 - Ore 22:00 - Campo C</div>
+        <div class="match" onclick="joinMatch('Partita 4')">⚽ Partita 4 - Ore 19:00 - Campo D</div>
       </div>
     </section>
 
     <section id="create">
       <h2>Crea nuova partita</h2>
-      <button onclick="alert('Funzione in sviluppo!')">➕ Crea partita</button>
+      <input type="text" placeholder="Nome partita" id="newMatchName">
+      <input type="time" id="newMatchTime">
+      <input type="text" placeholder="Campo" id="newMatchField">
+      <button onclick="createMatch()">➕ Crea partita</button>
     </section>
 
     <section id="settings">
       <h2>Impostazioni</h2>
-      <button onclick="alert('Salvataggio impostazioni!')">💾 Salva</button>
+      <label>
+        Tema:
+        <select id="themeSelect" onchange="changeTheme(this.value)">
+          <option value="blue">Blu</option>
+          <option value="purple">Viola</option>
+          <option value="green">Verde</option>
+        </select>
+      </label>
+      <button onclick="saveSettings()">💾 Salva</button>
+    </section>
+
+    <section id="stats">
+      <h2>Statistiche</h2>
+      <ul id="statsList">
+        <li>Giocatore più presente: Marco</li>
+        <li>Partita più partecipata: Partita 2</li>
+        <li>Gol totali: 34</li>
+      </ul>
     </section>
   </main>
 
   <script src="app.js"></script>
 </body>
 </html>
-
-
