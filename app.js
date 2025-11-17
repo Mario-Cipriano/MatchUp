@@ -34,21 +34,27 @@ function createMatch() {
 }
 
 function changeTheme(theme) {
+  // Reset styles
+  document.body.style.transition = 'background 0.5s, color 0.5s';
   switch(theme) {
     case 'white':
-      document.body.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0)';
+      document.body.style.backgroundColor = '#ffffff';
       document.body.style.color = '#121212';
       break;
     case 'gray':
-      document.body.style.background = 'linear-gradient(135deg, #7f8c8d, #95a5a6)';
+      document.body.style.backgroundColor = '#7f8c8d';
       document.body.style.color = '#fff';
       break;
     case 'black':
-      document.body.style.background = 'linear-gradient(135deg, #121212, #1c1c1c)';
+      document.body.style.backgroundColor = '#121212';
       document.body.style.color = '#fff';
       break;
     case 'purple':
-      document.body.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+      document.body.style.backgroundColor = '#8e44ad';
+      document.body.style.color = '#fff';
+      break;
+    default:
+      document.body.style.backgroundColor = '#121212';
       document.body.style.color = '#fff';
       break;
   }
@@ -60,5 +66,7 @@ function saveSettings() {
   alert('Impostazioni salvate!');
 }
 
-// Sezione predefinita
+// Imposta sezione predefinita e tema iniziale
 showSection('matches');
+changeTheme('black');
+
