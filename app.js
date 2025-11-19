@@ -1,72 +1,54 @@
-// app.js
-
-function showSection(sectionId) {
-  document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById(sectionId).classList.add('active');
-
-  document.querySelectorAll('nav ul li').forEach(li => li.classList.remove('active'));
-  document.querySelector(`#menu li[onclick*='${sectionId}']`).classList.add('active');
+// Replace with your Firebase config
+document.getElementById("preview-teams").innerHTML = `
+<div class='team'><h4>Team A</h4>${teams.A.map(p=>p.name).join("<br>")}</div>
+<div class='team'><h4>Team B</h4>${teams.B.map(p=>p.name).join("<br>")}</div>`;
 }
 
-function joinMatch(matchName) {
-  alert(`Ti sei unito a ${matchName}! 🎉`);
+
+// --- Matches ---
+document.getElementById("btn-create-match").onclick = async () => {
+const title = document.getElementById("match-title").value;
+const selected = [...document.querySelectorAll("#pick-players input:checked")]
+.map(i => i.dataset.id);
+
+
+const docs = await Promise.all(selected.map(id => db.collection("players").doc(id).get()));
+const players = docs.map(d => ({ id: d.id, ...d.data() }));
+const teams = balanceTeams(players);
+
+
+await db.collection("matches").add({
+title,
+owner: auth.currentUser.uid,
+teams,
+status: "open",
+createdAt: Date.now()
+});
+
+
+loadMatches();
+};
+
+
+async function loadMatches() {
+const u = auth.currentUser;
+const snap = await db.collection("matches")
+.where("owner", "==", u.uid)
+.orderBy("createdAt", "desc")
+.get();
+
+
+const box = document.getElementById("matches-list");
+box.innerHTML = "";
+
+
+snap.forEach(doc => {
+const m = doc.data();
+box.innerHTML += `<div class='card'>
+<h4>${m.title}</h4>
+<b>A:</b><br>${m.teams.A.map(p=>p.name).join('<br>')}<br><br>
+<b>B:</b><br>${m.teams.B.map(p=>p.name).join('<br>')}
+</div>`;
+});
 }
-
-function createMatch() {
-  const name = document.getElementById('newMatchName').value;
-  const time = document.getElementById('newMatchTime').value;
-  const field = document.getElementById('newMatchField').value;
-  if(name && time && field) {
-    const container = document.getElementById('matchesContainer');
-    const div = document.createElement('div');
-    div.classList.add('match');
-    div.textContent = `⚽ ${name} - Ore ${time} - ${field}`;
-    div.onclick = () => joinMatch(name);
-    container.appendChild(div);
-    alert(`Partita ${name} creata con successo! 🎉`);
-
-    document.getElementById('newMatchName').value = '';
-    document.getElementById('newMatchTime').value = '';
-    document.getElementById('newMatchField').value = '';
-  } else {
-    alert('Compila tutti i campi!');
-  }
-}
-
-function changeTheme(theme) {
-  // Reset styles
-  document.body.style.transition = 'background 0.5s, color 0.5s';
-  switch(theme) {
-    case 'white':
-      document.body.style.backgroundColor = '#ffffff';
-      document.body.style.color = '#121212';
-      break;
-    case 'gray':
-      document.body.style.backgroundColor = '#7f8c8d';
-      document.body.style.color = '#fff';
-      break;
-    case 'black':
-      document.body.style.backgroundColor = '#121212';
-      document.body.style.color = '#fff';
-      break;
-    case 'purple':
-      document.body.style.backgroundColor = '#8e44ad';
-      document.body.style.color = '#fff';
-      break;
-    default:
-      document.body.style.backgroundColor = '#121212';
-      document.body.style.color = '#fff';
-      break;
-  }
-}
-
-function saveSettings() {
-  const theme = document.getElementById('themeSelect').value;
-  changeTheme(theme);
-  alert('Impostazioni salvate!');
-}
-
-// Imposta sezione predefinita e tema iniziale
-showSection('matches');
-changeTheme('black');
 
